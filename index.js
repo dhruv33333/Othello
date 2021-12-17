@@ -1,10 +1,5 @@
 let board = document.getElementById('board');
 
-
-
-
-
-
 //making a 2-D array which stores the values/symbols
 let map = [];
 
@@ -65,7 +60,6 @@ function makeMove(symbol, x, y) {
     for (let dir = 0; dir < xDir.length; dir++) {
         let r = xDir[dir], c = yDir[dir];
         let i = x + r, j = y + c;
-        // System.out.println(i + " " + j);
         let otherSymbolCount = 0;
         while (i >= 0 && j >= 0 && i < 8 && j < 8) {
             if (map[i][j] == 0) {
@@ -84,7 +78,6 @@ function makeMove(symbol, x, y) {
         }
 
         if (flag == 2 && otherSymbolCount > 0) {
-            //System.out.println("abcd");
             makeChange(symbol, x, y, r, c);
             canMakeMove = true;
         }
@@ -96,7 +89,6 @@ function makeMove(symbol, x, y) {
 function makeChange(symbol, x, y, r, c) {
     let i = x + r;
     let j = y + c;
-    // System.out.println(i + " " + j);
     while (i >= 0 && j >= 0 && i < 8 && j < 8 && map[i][j] != symbol) {
         if (map[i][j] == 0)
             break;
