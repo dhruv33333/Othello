@@ -25,8 +25,8 @@ function setupGrid() {
     map[4][3] = 1;
     map[4][4] = 2;
     map[3][3] = 2;
-    for (let i = 0; i < map.length; i++) {
-        for (let j = 0; j < map[0].length; j++) {
+    for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 8; j++) {
 
             let a = document.createTextNode(map[i][j]);
             let ele = document.createElement('span');
@@ -106,7 +106,7 @@ function makeChange(symbol, x, y, r, c) {
 
 //updating each cell
 function updateBoxes() {
-    let k = 1;
+    let k = 0;
     for (let i = 0; i < map.length; i++) {
         for (let j = 0; j < map[0].length; j++) {
 
@@ -117,7 +117,7 @@ function updateBoxes() {
                 boxes[k].innerHTML = '<div id="whiteCircle"></div>'
             }
             else {
-                boxes[k].innerHTML = map[i][j];
+                boxes[k].innerHTML = '<div id="emptyBox"></div>';
             }
             k++;
 
@@ -156,20 +156,19 @@ function calculateWinner() {
 
 // resetting the whole grid
 function resetGrid() {
-    let k = 1;
 
-    console.log("resetting grid")
     for (let i = 0; i < 8; i++) {
         for (let j = 0; j < 8; j++) {
             map[i][j] = 0;
-            boxes[k].innerHTML = map[i][j];
-            k++;
         }
     }
     map[3][4] = 1;
     map[4][3] = 1;
     map[4][4] = 2;
     map[3][3] = 2;
+    turn=1;
+    turnOrWinner.innerHTML = "Black's turn";
+    updateBoxes();
 }
 
 
@@ -245,13 +244,12 @@ updateBoxes();
 let turnOrWinner = document.getElementById('result');
 turnOrWinner.innerHTML = "Black" + "'s turn";
 
-for (let i = 1; i <= boxes.length; i++) {
+for (let i = 0; i < boxes.length; i++) {
 
     boxes[i].addEventListener('click', function () {
 
-        let row = Math.floor((i - 1) / 8);
-        let col = Math.floor((i - 1) % 8);
-
+        let row = Math.floor((i) / 8);
+        let col = Math.floor((i) % 8);
         let canMakeMove = makeMove(turn, row, col);
         if (canMakeMove == false) {
             alert("Cant Move There\n Try Again");
